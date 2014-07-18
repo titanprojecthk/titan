@@ -17,12 +17,12 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
 	public User get(@PathVariable Integer userId) {
 		return userService.find(userId);
 	}
 
-	@RequestMapping(value = "/users/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/list", method = RequestMethod.GET)
 	public List<User> list() {
 		return userService.findAll();
 	}
