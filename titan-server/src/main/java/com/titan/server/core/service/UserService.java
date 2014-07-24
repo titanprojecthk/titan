@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.titan.server.core.domain.User;
+import com.titan.server.core.mapper.UserMapper;
 import com.titan.server.core.repository.UserRepository;
+import com.titan.server.web.model.UserVo;
 
 @Component
 public class UserService {
@@ -17,17 +19,17 @@ public class UserService {
 	private UserRepository userRepository;
 
 	@Transactional
-	public User find(Integer id) {
+	public UserVo find(Integer id) {
 		User user =  userRepository.findOne(id);
-		return user;
+		return UserMapper.map(user);
 	}
 	
 	@Transactional
-	public List<User> findAll() {
+	public List<UserVo> findAll() {
 		List<User> users = new ArrayList<User>();
 		for (User user : userRepository.findAll()) {
 			users.add(user);
 		}
-		return users;
+		return UserMapper.map(users);
 	}
 }

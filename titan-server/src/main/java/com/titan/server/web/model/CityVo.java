@@ -2,8 +2,9 @@ package com.titan.server.web.model;
 
 import java.math.BigDecimal;
 
-public class CityVo {
+public class CityVo extends BaseVo {
 
+	private static final long serialVersionUID = 3492106292427939480L;
 	private String name;
 	private BigDecimal lng;
 	private BigDecimal lat;

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.titan.server.core.domain.User;
 import com.titan.server.core.service.UserService;
+import com.titan.server.web.model.UserVo;
 
 @RestController
 public class UserController {
@@ -18,12 +18,12 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-	public User get(@PathVariable Integer userId) {
+	public UserVo get(@PathVariable Integer userId) {
 		return userService.find(userId);
 	}
 
 	@RequestMapping(value = "/user/list", method = RequestMethod.GET)
-	public List<User> list() {
+	public List<UserVo> list() {
 		return userService.findAll();
 	}
 }

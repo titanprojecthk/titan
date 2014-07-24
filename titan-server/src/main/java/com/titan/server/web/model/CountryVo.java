@@ -1,7 +1,8 @@
 package com.titan.server.web.model;
 
-public class CountryVo {
+public class CountryVo extends BaseVo {
 
+	private static final long serialVersionUID = -9191222368455803051L;
 	private String name;
 	private String code;
 
