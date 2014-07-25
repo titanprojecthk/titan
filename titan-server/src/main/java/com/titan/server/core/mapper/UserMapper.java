@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.titan.server.core.domain.User;
-import com.titan.server.web.model.TripVo;
 import com.titan.server.web.model.UserVo;
 
 public class UserMapper extends BaseMapper {
@@ -16,9 +15,6 @@ public class UserMapper extends BaseMapper {
 		
 		UserVo userVo = new UserVo();
 		BaseMapper.map(user, userVo);
-		
-		List<TripVo> tripVos = TripMapper.map(user.getTrips());
-		userVo.setTrips(tripVos);
 		
 		return userVo;
 	}

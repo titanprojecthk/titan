@@ -1,11 +1,20 @@
 package com.titan.server.core.domain;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
 import java.sql.Timestamp;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 
 /**
@@ -14,8 +23,8 @@ import java.util.List;
  */
 @Entity
 @Table(name = "trip")
-@NamedQuery(name="Trip.findAll", query="SELECT t FROM Trip t")
-public class Trip implements Serializable {
+@NamedQuery(name = "Trip.findByUser", query = "from Trip t where t.user = ?1")
+public class Trip extends AbstractPersistable<Integer> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
