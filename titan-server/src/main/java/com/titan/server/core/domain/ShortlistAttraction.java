@@ -14,6 +14,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 /**
  * The persistent class for the shortlist_attraction database table.
@@ -22,11 +25,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="shortlist_attraction")
 @NamedQuery(name="ShortlistAttraction.findAll", query="SELECT s FROM ShortlistAttraction s")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@shortlist_attraction_id")
 public class ShortlistAttraction implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name="create_time")

@@ -1,12 +1,23 @@
 package com.titan.server.core.domain;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
-import java.sql.Timestamp;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 /**
@@ -15,12 +26,16 @@ import java.util.List;
  */
 @Entity
 @Table(name = "attraction")
-@NamedQuery(name="Attraction.findAll", query="SELECT a FROM Attraction a")
+@NamedQueries({
+		@NamedQuery(name = "Attraction.findAll", query = "SELECT a FROM Attraction a"),
+//		@NamedQuery(name = "Attraction.findByShortlistId", query = "SELECT a FROM Attraction a where a.shortlistAttraction.shortlist.id = ?1") 
+})
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@attraction_id")
 public class Attraction implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name="create_by")

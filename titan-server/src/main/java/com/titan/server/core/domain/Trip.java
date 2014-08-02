@@ -10,11 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 /**
@@ -23,12 +27,16 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "trip")
-@NamedQuery(name = "Trip.findByUser", query = "from Trip t where t.user = ?1")
+@NamedQueries({
+	@NamedQuery(name = "Trip.findByUser", query = "from Trip t where t.user = ?1"),
+	@NamedQuery(name = "Trip.findByCityAndUser", query = "from Trip t where t.city = ?1 and t.user = ?2"),
+})
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@trip_id")
 public class Trip extends AbstractPersistable<Integer> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name="create_time")

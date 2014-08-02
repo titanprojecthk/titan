@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.sql.Timestamp;
 
 
@@ -14,11 +17,12 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="trip_shortlist")
 @NamedQuery(name="TripShortlist.findAll", query="SELECT t FROM TripShortlist t")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@trip_shortlist_id")
 public class TripShortlist implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name="create_time")

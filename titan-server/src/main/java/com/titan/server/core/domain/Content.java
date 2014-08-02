@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -15,6 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "content")
 @NamedQuery(name="Content.findAll", query="SELECT c FROM Content c")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@content_id")
 public class Content implements Serializable {
 	private static final long serialVersionUID = 1L;
 
